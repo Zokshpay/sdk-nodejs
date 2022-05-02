@@ -4,6 +4,7 @@
   "description": "Nodejs library to integrate Moopay payment gateway into your application",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "author": "Kamaljeet Singh <kamal@moopay.live>",
   "files": [
     "/dist"
   ],
@@ -16,8 +17,11 @@
     "type": "git",
     "url": "git+https://github.com/MooPay/sdk-nodejs.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "crypto-payments",
+    "crypto",
+    "moopay"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/MooPay/sdk-nodejs/issues"
