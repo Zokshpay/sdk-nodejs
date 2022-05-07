@@ -13,5 +13,5 @@ $ npm install --save-exact @moopay/sdk-nodejs
 ### Usage
 
 ```sh
-const moopaySdk = require('@moopay/sdk-nodejs')
+const Moopay = require('@moopay/sdk-nodejs').Moopay;
 ```

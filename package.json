@@ -1,13 +1,13 @@
 {
   "name": "@moopay/sdk-nodejs",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Nodejs library to integrate Moopay payment gateway into your application",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
   "author": "Kamaljeet Singh <kamal@moopay.live>",
   "files": [
-    "/dist"
+    "dist/"
   ],
   "scripts": {
     "prepublish": "npm run tsc",
