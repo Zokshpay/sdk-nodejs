@@ -1,8 +1,8 @@
 import * as https from "https";
 import * as crypto from "crypto";
 
-const TEST_NETWORK_PATH = "payments.testnet.moopay.live";
-const PROD_NETWORK_PATH = "payments.moopay.live";
+export const TEST_NETWORK_PATH = "payments.testnet.moopay.live";
+export const PROD_NETWORK_PATH = "payments.moopay.live";
 
 export class Connector {
   mooKey: string;
@@ -48,9 +48,9 @@ export class Connector {
     return new Promise((resolve, reject) => {
       let req;
 
-      const handler = (res) => {
+      const handler = (res: any) => {
         res.setEncoding("utf-8");
-        res.on("data", (d) => {
+        res.on("data", (d: any) => {
           try {
             resolve(JSON.parse(d));
           } catch (e) {
