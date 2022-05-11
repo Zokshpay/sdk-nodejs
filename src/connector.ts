@@ -19,14 +19,20 @@ export class Connector {
     }
   }
 
-  calculateSignature = (path: string, body: any) => {
+  calculateSignature = (path: string, body: any, useTime: number = -1) => {
     const postBody = JSON.stringify(body);
-    const ts = new Date().getTime();
+    const ts = useTime != -1 ? useTime : new Date().getTime();
     const hmac = crypto.createHmac("sha256", this.mooSecret);
 
     const toSign = `${ts}${path}${postBody}`;
     const signature = hmac.update(toSign).digest("hex");
     return { ts, signature };
+  };
+
+  validateSignature = (path: string, headers: any, body: any) => {
+    console.log(headers);
+    console.log("Request body");
+    console.log(body);
   };
 
   signAndSend = (path: string, body: any) => {
