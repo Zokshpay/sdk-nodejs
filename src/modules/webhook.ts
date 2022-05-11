@@ -55,9 +55,14 @@ export class Webhook extends ApiResource {
     return true;
   }
 
+  handle(headers: any, body: any) {
+    return this.test({ headers, body });
+  }
+
   express = (req: any, res: any, next: any) => {
     try {
       this.test(req);
+      next(true);
     } catch (e) {
       next?.(e);
     }

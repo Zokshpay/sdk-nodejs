@@ -46,3 +46,31 @@ mp.payment.validate(transactionHash).then(result => {
     // an error occured during payment validation
 })
 ```
+
+### Validate webhook
+
+Please check [Webhook](https://docs.moopay.live/api%20access/webhook/) for more details.
+
+```sh
+// setup the webhook end point that you have added in the your dashboard settings.
+mp.webhookEndPoint = 'YOUR_FULL_END_POINT_URL';
+const webhook = mp.webhook;
+// to test a request like object. which has *headers*, and *body* property
+try {
+    const result = webhook.test(req);
+    // result is *true* if valid signature found.
+} catch(e) {
+    console.error(e);
+}
+// to test headers and body directly.
+try {
+    const result = webhook.handle(headers, body);
+    // result is *true* if valid signature found.
+} catch(e) {
+    console.error(e);
+}
+// to use as *express* middleware,
+app.post('/webhook', webhook, (req, res, next) => {
+
+});
+```
