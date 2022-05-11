@@ -70,7 +70,7 @@ try {
     console.error(e);
 }
 // to use as *express* middleware,
-app.post('/webhook', webhook, (req, res, next) => {
+app.post('/webhook', webhook.express, (req, res, next) => {
 
 });
 ```
