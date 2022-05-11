@@ -33,3 +33,16 @@ order.then(result => {
     // an error occured during order creation.
 })
 ```
+
+### Validate Payment
+
+Please check [Payment validation](https://docs.moopay.live/api%20access/validate-payment/) for more details.
+
+```sh
+const transactionHash = '0x01d18ad4f395eec42678c6564d2820b18986b3ed012527f0bf5c22ef1450fc83';
+mp.payment.validate(transactionHash).then(result => {
+    // called on successful request.
+}).catch(err => {
+    // an error occured during payment validation
+})
+```
