@@ -45,7 +45,11 @@ export const PATH_CREATE = "/v2/order";
 
 export class Order extends ApiResource {
   create(info: OrderType) {
-    if (!info.amount || info.amount.trim() == "") {
+    if (!info.amount) {
+      throw new Error(ErrorCode.INVALID_AMOUNT);
+    }
+    const im = info.amount.toString();
+    if (im.trim() == "") {
       throw new Error(ErrorCode.INVALID_AMOUNT);
     }
     try {
