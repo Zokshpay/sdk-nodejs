@@ -32,24 +32,28 @@ export class Webhook extends ApiResource {
       throw new Error(ErrorCode.MISSING_REQUEST_BODY);
     }
     const {
-      headers: { "moo-key": mooKey, "moo-ts": mooTs, "moo-sign": mooSign },
+      headers: {
+        "zoksh-key": zokshKey,
+        "zoksh-ts": zokshTs,
+        "zoksh-sign": zokshSign,
+      },
     } = req;
 
-    if (!mooKey || !mooTs || !mooSign) {
+    if (!zokshKey || !zokshTs || !zokshSign) {
       throw new Error(ErrorCode.INVALID_REQUEST_HEADERS);
     }
     const body = req.body;
-    return { mooKey, mooTs, mooSign, body };
+    return { zokshKey, zokshTs, zokshSign, body };
   }
 
   test(req: RequestType) {
-    const { mooSign, mooTs, body } = this._parse(req);
+    const { zokshSign, zokshTs, body } = this._parse(req);
     const { signature } = this.connector.calculateSignature(
       this.endpoint.pathname,
       body,
-      mooTs
+      zokshTs
     );
-    if (signature != mooSign) {
+    if (signature != zokshSign) {
       throw new Error(ErrorCode.INVALID_SIGNATURE);
     }
     return true;

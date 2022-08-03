@@ -1,17 +1,17 @@
 import * as https from "https";
 import * as crypto from "crypto";
 
-export const TEST_NETWORK_PATH = "payments.testnet.moopay.live";
-export const PROD_NETWORK_PATH = "payments.moopay.live";
+export const TEST_NETWORK_PATH = "payments.testnet.zoksh.com";
+export const PROD_NETWORK_PATH = "payments.zoksh.com";
 
 export class Connector {
-  mooKey: string;
-  mooSecret: string;
+  zokshKey: string;
+  zokshSecret: string;
   basePath: string;
 
-  constructor(mooKey: string, mooSecret: string, testnet: boolean = true) {
-    this.mooKey = mooKey;
-    this.mooSecret = mooSecret;
+  constructor(zokshKey: string, zokshSecret: string, testnet: boolean = true) {
+    this.zokshKey = zokshKey;
+    this.zokshSecret = zokshSecret;
     if (testnet) {
       this.basePath = TEST_NETWORK_PATH;
     } else {
@@ -22,7 +22,7 @@ export class Connector {
   calculateSignature = (path: string, body: any, useTime: number = -1) => {
     const postBody = JSON.stringify(body);
     const ts = useTime != -1 ? useTime : new Date().getTime();
-    const hmac = crypto.createHmac("sha256", this.mooSecret);
+    const hmac = crypto.createHmac("sha256", this.zokshSecret);
 
     const toSign = `${ts}${path}${postBody}`;
     const signature = hmac.update(toSign).digest("hex");
@@ -45,9 +45,9 @@ export class Connector {
       headers: {
         "Content-Type": "application/json",
         "Content-Length": data.length,
-        "MOO-KEY": this.mooKey,
-        "MOO-TS": ts,
-        "MOO-SIGN": signature,
+        "ZOKSH-KEY": this.zokshKey,
+        "ZOKSH-TS": ts,
+        "ZOKSH-SIGN": signature,
       },
     };
 
