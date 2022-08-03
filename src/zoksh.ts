@@ -7,20 +7,20 @@ const PATHS = {
   ORDER_CREATE: "/v2/order",
   VALIDATE_PAYMENT: "/v2/validate-payment",
 };
-export class Moopay {
+export class Zoksh {
   connector: Connector;
   _order: Order;
   _payment: Payment;
   _webhook: Webhook | undefined;
 
-  constructor(mooKey: string, mooSecret: string, testnet: boolean = true) {
-    if (!mooKey) {
-      throw new Error("Moopay key missing");
+  constructor(zokshKey: string, zokshSecret: string, testnet: boolean = true) {
+    if (!zokshKey) {
+      throw new Error("Zoksh key missing");
     }
-    if (!mooSecret) {
-      throw new Error("Moopay secret missing");
+    if (!zokshSecret) {
+      throw new Error("Zoksh secret missing");
     }
-    this.connector = new Connector(mooKey, mooSecret, testnet);
+    this.connector = new Connector(zokshKey, zokshSecret, testnet);
     this._order = new Order(this.connector);
     this._payment = new Payment(this.connector);
   }
@@ -47,7 +47,7 @@ export class Moopay {
   get webhook(): Webhook {
     if (!this._webhook) {
       throw new Error(
-        "Webhook end point not defined, please call moopay.webhookEndPoint() first"
+        "Webhook end point not defined, please call zoksh.webhookEndPoint() first"
       );
     }
     return this._webhook;

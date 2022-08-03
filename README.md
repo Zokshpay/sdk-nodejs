@@ -1,26 +1,26 @@
-## Node.js SDK for Moopay payment gateway integration.
+## Node.js SDK for Zoksh payment gateway integration.
 
 Repo aim is to simplify api integration.
 
-Please go throught [Official documentation](https://docs.moopay.live) to get overview of how payment integration works.
+Please go throught [Official documentation](https://docs.zoksh.com) to get overview of how payment integration works.
 
 ### Installation
 
 ```sh
-$ npm install --save-exact @moopay/sdk-nodejs
+$ npm install --save-exact @zokshpay/sdk-nodejs
 ```
 
 ### Initialize
 
 ```sh
-const Moopay = require('@moopay/sdk-nodejs').Moopay;
+const Zoksh = require('@zokshpay/sdk-nodejs').Zoksh;
 // by default it makes connection to testnet, pass in false as third argument to connect to production servers.
-const mp = new Moopay(apiKey, apiSecret);
+const mp = new Zoksh(apiKey, apiSecret);
 ```
 
 ### Create Order
 
-Please checkout [Order options](https://docs.moopay.live/api%20access/create-order/) to see all possible options available during order creation.
+Please checkout [Order options](https://docs.zoksh.com/api%20access/create-order/) to see all possible options available during order creation.
 
 ```sh
 const orderOptions = {amount: 1};
@@ -36,7 +36,7 @@ order.then(result => {
 
 ### Validate Payment
 
-Please check [Payment validation](https://docs.moopay.live/api%20access/validate-payment/) for more details.
+Please check [Payment validation](https://docs.zoksh.com/api%20access/validate-payment/) for more details.
 
 ```sh
 const transactionHash = '0x01d18ad4f395eec42678c6564d2820b18986b3ed012527f0bf5c22ef1450fc83';
@@ -49,7 +49,7 @@ mp.payment.validate(transactionHash).then(result => {
 
 ### Validate webhook
 
-Please check [Webhook](https://docs.moopay.live/api%20access/webhook/) for more details.
+Please check [Webhook](https://docs.zoksh.com/api%20access/webhook/) for more details.
 
 ```sh
 // setup the webhook end point that you have added in the your dashboard settings.

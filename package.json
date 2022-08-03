@@ -1,11 +1,11 @@
 {
-  "name": "@moopay/sdk-nodejs",
+  "name": "@zokshpay/sdk-nodejs",
   "version": "1.0.8",
-  "description": "Nodejs library to integrate Moopay payment gateway into your application",
+  "description": "Nodejs library to integrate Zoksh payment gateway into your application",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
-  "author": "Kamaljeet Singh <kamal@moopay.live>",
+  "author": "Kamaljeet Singh <kamal@zoksh.com>",
   "files": [
     "dist/"
   ],
@@ -16,18 +16,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MooPay/sdk-nodejs.git"
+    "url": "git+https://github.com/Zokshpay/sdk-nodejs.git"
   },
   "keywords": [
     "crypto-payments",
     "crypto",
-    "moopay"
+    "moopay",
+    "zoksh"
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MooPay/sdk-nodejs/issues"
+    "url": "https://github.com/Zokshpay/sdk-nodejs/issues"
   },
-  "homepage": "https://github.com/MooPay/sdk-nodejs#readme",
+  "homepage": "https://github.com/Zokshpay/sdk-nodejs#readme",
   "devDependencies": {
     "@types/chai": "^4.3.1",
     "@types/mocha": "^9.1.1",

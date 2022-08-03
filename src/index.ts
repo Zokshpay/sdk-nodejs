@@ -1,1 +1,1 @@
-export { Moopay } from "./moopay";
+export { Zoksh } from "./zoksh";

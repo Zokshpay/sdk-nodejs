@@ -19,7 +19,7 @@ describe("Webhook Module", () => {
     let webhookEP: URL;
 
     before(() => {
-      webhookEP = new URL("http://test.moopay.live/webhook");
+      webhookEP = new URL("http://test.zoksh.com/webhook");
       connector = new Connector(TEST_KEY, TEST_SECRET, true);
       webhook = new Webhook(connector, webhookEP);
     });
@@ -31,7 +31,7 @@ describe("Webhook Module", () => {
     });
 
     it("Should fail, stamp missing", async () => {
-      const mR = { ...mockRequest, headers: { "moo-sign": "helloworld" } };
+      const mR = { ...mockRequest, headers: { "zoksh-sign": "helloworld" } };
       expect(webhook.test.bind(webhook, mR)).to.throw(
         ErrorCode.INVALID_REQUEST_HEADERS
       );
@@ -48,9 +48,9 @@ describe("Webhook Module", () => {
       const mR = {
         body: bd,
         headers: {
-          "moo-sign": signature,
-          "moo-ts": stamp,
-          "moo-key": TEST_KEY,
+          "zoksh-sign": signature,
+          "zoksh-ts": stamp,
+          "zoksh-key": TEST_KEY,
         },
       };
       const rs = webhook.test(mR);
