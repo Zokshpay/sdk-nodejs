@@ -1,6 +1,6 @@
 {
   "name": "@zokshpay/sdk-nodejs",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Nodejs library to integrate Zoksh payment gateway into your application",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
