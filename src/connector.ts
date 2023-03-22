@@ -44,12 +44,21 @@ export class Connector {
       if (res.statusCode === 301 || res.statusCode === 302) {
         if (this.redirectCount < 3) {
           this.redirectCount++;
-          const url = new URL(res.headers.location);
-          const opts = {
-            ...options,
-            hostname: url.hostname,
-            path: url.pathname,
-          };
+          const loc = res.headers.location;
+          let opts;
+          if (loc.match(/^http/)) {
+            const url = new URL(loc);
+            opts = {
+              ...options,
+              hostname: url.hostname,
+              path: url.pathname,
+            };
+          } else {
+            opts = {
+              ...options,
+              path: loc,
+            };
+          }
           this.doRequest(opts, data, resolve, reject);
           return;
         } else {
