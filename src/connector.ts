@@ -35,8 +35,49 @@ export class Connector {
     console.log(body);
   };
 
-  signAndSend = (path: string, body: any) => {
-    const { ts, signature } = this.calculateSignature(path, body);
+  redirectCount: number = 0;
+
+  doRequest = (options: any, data: any, resolve: any, reject: any) => {
+    let req;
+
+    const handler = (res: any) => {
+      if (res.statusCode === 301 || res.statusCode === 302) {
+        if (this.redirectCount < 3) {
+          this.redirectCount++;
+          const url = new URL(res.headers.location);
+          const opts = {
+            ...options,
+            hostname: url.hostname,
+            path: url.pathname,
+          };
+          this.doRequest(opts, data, resolve, reject);
+          return;
+        } else {
+          throw new Error("Server redirected too many times");
+        }
+      }
+      res.setEncoding("utf-8");
+      res.on("data", (d: any) => {
+        try {
+          resolve(JSON.parse(d));
+        } catch (e) {
+          reject(e);
+        }
+      });
+    };
+
+    req = https.request(options, handler);
+
+    req.on("error", (error) => {
+      reject(error);
+    });
+
+    req.write(data);
+    req.end();
+  };
+
+  signAndSend = (path: string, body: any, stamp: number = -1) => {
+    const { ts, signature } = this.calculateSignature(path, body, stamp);
     let data = new TextEncoder().encode(JSON.stringify(body));
     let options = {
       method: "POST",
@@ -51,28 +92,8 @@ export class Connector {
       },
     };
 
-    return new Promise((resolve, reject) => {
-      let req;
-
-      const handler = (res: any) => {
-        res.setEncoding("utf-8");
-        res.on("data", (d: any) => {
-          try {
-            resolve(JSON.parse(d));
-          } catch (e) {
-            reject(e);
-          }
-        });
-      };
-
-      req = https.request(options, handler);
-
-      req.on("error", (error) => {
-        reject(error);
-      });
-
-      req.write(data);
-      req.end();
-    });
+    return new Promise((resolve, reject) =>
+      this.doRequest(options, data, resolve, reject)
+    );
   };
 }
