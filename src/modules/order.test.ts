@@ -1,14 +1,14 @@
 const nock = require("nock");
 
 import { expect } from "chai";
-import { Connector, TEST_NETWORK_PATH } from "../connector";
+import { Connector, SANDBOX_NETWORK_PATH } from "../connector";
 import { ErrorCode, Order, OrderType, PATH_CREATE } from "./order";
 
 describe("Order Module", () => {
   describe("Order Create", () => {
     let order: Order;
     before(() => {
-      nock(`https://${TEST_NETWORK_PATH}`)
+      nock(`https://${SANDBOX_NETWORK_PATH}`)
         .post(PATH_CREATE)
         .reply(200, { orderId: 1, createdAt: 1 });
       const connector = new Connector("testKey", "testSecret", true);
