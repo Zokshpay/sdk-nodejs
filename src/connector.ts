@@ -1,7 +1,7 @@
 import * as https from "https";
 import * as crypto from "crypto";
 
-export const TEST_NETWORK_PATH = "payments.testnet.zoksh.com";
+export const SANDBOX_NETWORK_PATH = "payments.sandbox.zoksh.com";
 export const PROD_NETWORK_PATH = "payments.zoksh.com";
 
 export class Connector {
@@ -9,11 +9,11 @@ export class Connector {
   zokshSecret: string;
   basePath: string;
 
-  constructor(zokshKey: string, zokshSecret: string, testnet: boolean = true) {
+  constructor(zokshKey: string, zokshSecret: string, sandbox: boolean = true) {
     this.zokshKey = zokshKey;
     this.zokshSecret = zokshSecret;
-    if (testnet) {
-      this.basePath = TEST_NETWORK_PATH;
+    if (sandbox) {
+      this.basePath = SANDBOX_NETWORK_PATH;
     } else {
       this.basePath = PROD_NETWORK_PATH;
     }
@@ -27,12 +27,6 @@ export class Connector {
     const toSign = `${ts}${path}${postBody}`;
     const signature = hmac.update(toSign).digest("hex");
     return { ts, signature };
-  };
-
-  validateSignature = (path: string, headers: any, body: any) => {
-    console.log(headers);
-    console.log("Request body");
-    console.log(body);
   };
 
   redirectCount: number = 0;
